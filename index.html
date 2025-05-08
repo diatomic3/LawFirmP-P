@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головна - Адвокатське Бюро «ПУСТОВОЙТОВ І ПАРТНЕРИ»</title>
+    <style>
+        /* ----- CSS Змінні (Variables) ----- */
+        :root {
+            --primary-color: #003366; /* Темно-синій, як основний колір для акцентів */
+            --secondary-color: #0055a4; /* Світліший синій */
+            --dark-gray: #333333;
+            --medium-gray: #555555;
+            --light-gray: #f4f4f4;
+            --white-color: #ffffff;
+            --font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Заглушка, потім оберемо в темі */
+            --font-family-headings: 'Georgia', serif; /* Заглушка для заголовків */
+            --container-width: 1140px;
+            --border-radius: 5px;
+        }
+
+        /* ----- Базові скидання та стилі ----- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавний скрол по якірних посиланнях */
+            font-size: 16px; /* Базовий розмір шрифту для rem */
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--white-color);
+            overflow-x: hidden; /* Запобігає горизонтальній прокрутці на мобільних */
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+            width: 100%; /* Гарантує, що контейнер займе всю доступну ширину */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Запобігає зайвим проміжкам внизу зображень */
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease; /* Плавна зміна кольору при наведенні */
+            display: inline-block; /* Збільшує область для тапу на мобільних */
+        }
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-headings);
+            margin-bottom: 0.75em;
+            line-height: 1.3;
+            color: var(--primary-color);
+        }
+        h1 { font-size: 2.5em; }
+        h2 { font-size: 2em; text-align: center; margin-bottom: 40px; } /* Головні заголовки секцій */
+        h3 { font-size: 1.8em; }
+        h4 { font-size: 1.4em; color: var(--secondary-color); }
+
+
+        /* ----- Стилі для Шапки (Header) ----- */
+        .site-header {
+            background-color: var(--white-color);
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky; /* "Прилипаюча" шапка */
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Дозволяє елементам переноситись на мобільному */
+        }
+
+        .logo-area {
+            margin-right: auto; /* Логотип завжди ліворуч */
+        }
+        
+        .logo-area a {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .logo-area .logo-abbr {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        .logo-area .firm-name {
+            font-size: 0.8em;
+            color: var(--medium-gray);
+            line-height: 1.2;
+            margin-top: -5px;
+        }
+
+        /* Мобільне меню - бургер */
+        .menu-toggle {
+            display: none; /* За замовчуванням приховано */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 5px 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .header-contacts {
+            text-align: right;
+            padding: 5px 0;
+        }
+        .header-contacts .phone {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--dark-gray);
+            display: block;
+            padding: 5px 0; /* Збільшує область для тапу на мобільних */
+        }
+        .header-contacts .schedule { /* Можна додати графік роботи */
+            font-size: 0.8em;
+            color: var(--medium-gray);
+        }
+
+        .main-navigation {
+            width: auto; /* На десктопі займає необхідну ширину */
+        }
+
+        .main-navigation ul {
+            list-style: none;
+            display: flex;
+        }
+        .main-navigation ul li {
+            margin-left: 25px;
+        }
+        .main-navigation ul li a {
+            color: var(--dark-gray);
+            font-weight: 500;
+            padding: 10px 5px; /* Збільшено для кращого тапу на мобільних */
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .main-navigation ul li a:hover,
+        .main-navigation ul li a.active { /* Клас для активного пункту */
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* ----- Стилі для Першого екрану (Hero Section) ----- */
+        .hero-section {
+            background-color: var(--light-gray); /* Або фонове зображення */
+            /* background-image: url('placeholder-hero-bg.jpg'); */
+            /* background-size: cover; */
+            /* background-position: center; */
+            padding: 60px 0; /* Зменшено з 80px для мобільних */
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .hero-section h1 {
+            color: var(--primary-color); /* Заголовок на світлому фоні може бути темним */
+            margin-bottom: 25px;
+            word-wrap: break-word; /* Запобігає переповненню тексту на малих екранах */
+        }
+        .hero-section .subtitle {
+            font-size: 1.25em;
+            color: var(--medium-gray);
+            max-width: 700px;
+            margin: 0 auto 35px auto;
+        }
+        .button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 28px;
+            border-radius: var(--border-radius);
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: 2px solid var(--primary-color);
+            width: auto; /* Кнопка має відповідати розміру тексту */
+            text-align: center;
+            margin: 10px 5px; /* Додано відступи для мобільних */
+        }
+        .button:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--white-color);
+            transform: translateY(-2px);
+        }
+        .button-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        .button-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        /* ----- Загальні стилі для Секцій ----- */
+        .content-section {
+            padding: 50px 0; /* Зменшено з 60px для мобільних */
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* ----- Стилі для Блоків (наприклад, послуги, переваги) ----- */
+        .grid-container { /* Простий контейнер для сітки */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Зменшено з 30px для мобільних */
+            justify-content: center; /* Центрує блоки на мобільних */
+        }
+        .grid-item {
+            background-color: var(--white-color);
+            padding: 20px; /* Зменшено з 25px для мобільних */
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 1 1 calc(33.333% - 20px); /* Для 3 колонок, враховуючи gap */
+            min-width: 280px; /* Мінімальна ширина для адаптивності */
+            display: flex;
+            flex-direction: column; /* Вирівнює висоту блоків */
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .grid-item img {
+            margin: 0 auto 15px; /* Центруємо іконки */
+            border-radius: 50%;
+        }
+        
+        .grid-item h4 { 
+            margin-top: 0; 
+            text-align: center; /* Центруємо заголовки в блоках */
+        }
+        
+        .grid-item p { 
+            margin-bottom: 15px; 
+            color: var(--medium-gray); 
+            flex-grow: 1; /* Текст займає доступний простір */
+        }
+        
+        .grid-item a {
+            align-self: flex-start; /* Вирівнювання посилання внизу блоку */
+            padding: 5px 0; /* Збільшує область для тапу */
+        }
+
+        /* ----- Стилі для Підвалу (Footer) ----- */
+        .site-footer {
+            background-color: var(--dark-gray);
+            color: var(--light-gray);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .site-footer p {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .site-footer a {
+            color: var(--white-color);
+            padding: 5px 2px; /* Збільшує область для тапу на мобільних */
+        }
+        .site-footer a:hover {
+            color: #cccccc;
+        }
+        .footer-navigation ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer-navigation ul li {
+            display: inline-block;
+            margin: 5px 12px; /* Збільшено вертикальний відступ */
+        }
+
+        /* ----- Адаптивність (Enhanced Responsiveness) ----- */
+        @media (max-width: 992px) {
+            .site-header .container {
+                justify-content: space-between; /* Логотип ліворуч, бургер праворуч */
+            }
+            
+            /* Активуємо мобільне меню */
+            .menu-toggle {
+                display: block;
+                order: 3; /* Ставимо бургер правіше від контактів */
+            }
+            
+            .main-navigation {
+                width: 100%;
+                order: 4; /* Меню під логотипом і контактами */
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            
+            .main-navigation.active {
+                max-height: 500px; /* Достатньо для відображення всіх пунктів меню */
+            }
+            
+            .main-navigation ul {
+                flex-direction: column;
+                width: 100%;
+                padding: 10px 0;
+            }
+            
+            .main-navigation ul li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .main-navigation ul li a {
+                display: block;
+                padding: 12px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .main-navigation ul li:last-child a {
+                border-bottom: none;
+            }
+            
+            .header-contacts {
+                order: 2; /* Контакти праворуч від логотипу */
+                margin-top: 0;
+            }
+            
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.7em; margin-bottom: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-item {
+                flex: 1 1 calc(50% - 20px); /* 2 колонки на планшетах */
+            }
+            
+            .button {
+                display: block;
+                width: 100%;
+                max-width: 300px;
+                margin: 10px auto; /* Центруємо кнопки */
+            }
+            
+            #cta .button {
+                margin: 10px auto;
+            }
+            
+            .hero-section .subtitle {
+                font-size: 1.1em;
+            }
+            
+            /* Зменшуємо шапку для мобільного */
+            .logo-area .logo-abbr {
+                font-size: 2em;
+            }
+            
+            .logo-area .firm-name {
+                font-size: 0.7em;
+            }
+            
+            .header-contacts .phone {
+                font-size: 1em;
+            }
+            
+            .header-contacts .schedule {
+                font-size: 0.7em;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            html {
+                font-size: 14px; /* Зменшуємо базовий розмір шрифту */
+            }
+            
+            .grid-item {
+                flex: 1 1 100%; /* 1 колонка на мобільних */
+            }
+            
+            .hero-section { padding: 40px 0; }
+            .hero-section h1 { font-size: 1.7em; }
+            .hero-section .subtitle { font-size: 1em; }
+            
+            .content-section {
+                padding: 40px 0;
+            }
+            
+            /* Організація футера для мобільного */
+            .footer-navigation ul {
+                flex-direction: column;
+            }
+            
+            .footer-navigation ul li {
+                margin: 5px 0;
+            }
+            
+            /* Адаптуємо контакти в шапці для компактності */
+            .site-header .container {
+                padding: 5px 10px;
+            }
+            
+            .header-contacts {
+                font-size: 0.9em;
+            }
+        }
+
+        .text-center { text-align: center; }
+        .mt-20 { margin-top: 20px; }
+        .mt-40 { margin-top: 40px; }
+
+    </style>
+    <!-- Додаємо JavaScript для мобільного меню -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Знаходимо кнопку меню і навігацію
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.main-navigation');
+            
+            // Додаємо обробник події для кнопки меню
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    nav.classList.toggle('active');
+                });
+            }
+            
+            // Закриваємо меню при кліку на пункт
+            const menuItems = document.querySelectorAll('.main-navigation a');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <div class="logo-area">
+                <a href="index.html" title="На головну">
+                    <div class="logo-abbr">P&P</div>
+                    <div class="firm-name">Адвокатське Бюро<br>«ПУСТОВОЙТОВ І ПАРТНЕРИ»</div>
+                </a>
+            </div>
+            <div class="header-contacts">
+                <a href="tel:+380000000000" class="phone">+380 XX XXX XX XX</a>
+                <div class="schedule">Пн-Пт: 9:00 - 18:00</div>
+            </div>
+            <!-- Кнопка мобільного меню -->
+            <button class="menu-toggle" aria-label="Відкрити меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="main-navigation" role="navigation" aria-label="Головна навігація">
+                <ul>
+                    <li><a href="#hero" class="active">Головна</a></li>
+                    <li><a href="#about">Про Бюро</a></li>
+                    <li><a href="#services">Послуги</a></li>
+                    <li><a href="prices.html">Ціни</a></li> 
+                    <li><a href="news.html">Новини</a></li> 
+                    <li><a href="contact.html">Контакти</a></li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main">
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>Військовий адвокат в Івано-Франківську: ваш надійний правовий щит</h1>
+                <p class="subtitle">Професійний юридичний супровід у справах звільнення зі служби, ВЛК, ТЦК, захисту прав військовослужбовців та мобілізаційних питаннях.</p>
+                <a href="contact.html#consultation-form" class="button">Записатися на консультацію</a>
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="container">
+                <h2>Кілька слів про наше бюро</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 30px auto;">Адвокатське Бюро «ПУСТОВОЙТОВ І ПАРТНЕРИ» – це команда відданих своїй справі професіоналів, що спеціалізується на наданні комплексної юридичної допомоги у сфері військового права. Ми розуміємо специфіку проблем, з якими стикаються військовослужбовці та їхні родини, і пропонуємо ефективні рішення, засновані на глибокому знанні законодавства та успішному практичному досвіді.</p>
+                <div class="text-center mt-20">
+                    <a href="about_full.html" class="button button-outline">Дізнатися більше</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="content-section" style="background-color: var(--light-gray);">
+            <div class="container">
+                <h2>Наші ключові практики у військовому праві</h2>
+                <div class="grid-container">
+                    <article class="grid-item">
+                        <img src="https://via.placeholder.com/80x80/003366/FFFFFF?Text=P&P" alt="Іконка Звільнення" style="margin-bottom:15px; border-radius: 50%;"> 
+                        <h4>Звільнення з військової служби</h4>
+                        <p>Правовий аналіз підстав, підготовка документів, представництво інтересів для законного звільнення.</p>
+                        <a href="service_zvilnennia.html">Детальніше &rarr;</a>
+                    </article>
+                    <article class="grid-item">
+                        <img src="https://via.placeholder.com/80x80/003366/FFFFFF?Text=P&P" alt="Іконка ТЦК та ВЛК" style="margin-bottom:15px; border-radius: 50%;">
+                        <h4>Супровід в ТЦК та ВЛК</h4>
+                        <p>Консультації, оскарження неправомірних дій та рішень, допомога в проходженні медичних комісій.</p>
+                        <a href="service_tck_vlk.html">Детальніше &rarr;</a>
+                    </article>
+                    <article class="grid-item">
+                        <img src="https://via.placeholder.com/80x80/003366/FFFFFF?Text=P&P" alt="Іконка Захист прав" style="margin-bottom:15px; border-radius: 50%;">
+                        <h4>Захист прав військовослужбовців</h4>
+                        <p>Допомога в отриманні виплат, компенсацій, оскарження дисциплінарних стягнень, соціальні гарантії.</p>
+                        <a href="service_zahyst_prav.html">Детальніше &rarr;</a>
+                    </article>
+                </div>
+                <div class="text-center mt-40">
+                    <a href="services_all.html" class="button">Всі послуги бюро</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="advantages" class="content-section">
+            <div class="container">
+                <h2>Чому нам довіряють?</h2>
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <h4>Вузька спеціалізація</h4>
+                        <p>Ми фокусуємося на військовому праві, що гарантує глибоке розуміння всіх юридичних аспектів та актуальної практики.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Практичний досвід</h4>
+                        <p>Багаторічний досвід успішного ведення справ військовослужбовців у судах та інших інстанціях.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>Індивідуальний підхід</h4>
+                        <p>Кожна справа унікальна. Ми розробляємо персональну стратегію захисту для досягнення найкращого результату.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="content-section" style="background-color: var(--primary-color); color: var(--white-color);">
+            <div class="container text-center">
+                <h2 style="color: var(--white-color);">Потрібна консультація військового адвоката?</h2>
+                <p style="font-size: 1.1em; max-width: 700px; margin: 0 auto 30px auto;">Не залишайтеся наодинці з проблемами. Зверніться до професіоналів, які допоможуть знайти оптимальне правове рішення. Перший крок – це консультація.</p>
+                <a href="tel:+380000000000" class="button button-outline" style="border-color: var(--white-color); color: var(--white-color);">Зателефонувати</a>
+                <a href="contact.html#consultation-form" class="button" style="background-color: var(--white-color); color: var(--primary-color);">Залишити заявку онлайн</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="logo-area" style="margin-bottom: 20px; display:inline-block; text-align:center;">
+                 <div class="logo-abbr" style="color: var(--white-color); font-size: 2em;">P&P</div>
+                 <div class="firm-name" style="color: var(--light-gray); font-size: 0.7em;">Адвокатське Бюро «ПУСТОВОЙТОВ І ПАРТНЕРИ»</div>
+            </div>
+            <p>м. Івано-Франківськ, вул. Якась, буд. XX, оф. YY</p>
+            <p>Email: <a href="mailto:info@pnp.com.ua">info@pnp.com.ua</a></p>
+            <p>Телефон: <a href="tel:+380000000000">+380 XX XXX XX XX</a></p>
+            <nav class="footer-navigation" role="navigation" aria-label="Додаткова навігація">
+                <ul>
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="about_full.html">Про нас</a></li>
+                    <li><a href="services_all.html">Послуги</a></li>
+                    <li><a href="privacy_policy.html">Політика конфіденційності</a></li>
+                </ul>
+            </nav>
+            <p style="margin-top: 20px; font-size: 0.8em;">&copy; 2024 - <script>document.write(new Date().getFullYear())</script> Адвокатське Бюро «ПУСТОВОЙТОВ І ПАРТНЕРИ». Всі права захищено.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
