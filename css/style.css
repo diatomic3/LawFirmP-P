@@ -511,3 +511,251 @@ h4 { font-size: 1.4em; color: var(--secondary-color); }
     margin-top: 20px;
     font-size: 0.8em;
 }
+
+/* ----- Стилі для секції "Наша Команда" (приклад місця для додавання) ----- */
+.team-member-photo {
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    width: 150px;      /* Ви можете змінити цей розмір за потреби */
+    height: 150px;     /* Ви можете змінити цей розмір за потреби */
+    object-fit: cover; /* Зберігає пропорції фото, обрізаючи зайве */
+    display: block;    /* Додано для кращої поведінки margin: auto */
+}
+
+/* Стиль для ролі члена команди (приклад, якщо потрібно) */
+.team-member-role {
+    font-weight: bold;
+    color: var(--secondary-color); /* Використання змінної кольору */
+    text-align: center;
+    margin-bottom: 10px; /* Додано відступ знизу */
+}
+
+/* ----- Стилі для сторінки Контактів та її елементів ----- */
+
+/* Стиль для вступної секції на внутрішніх сторінках */
+.page-intro-section {
+    padding-top: 80px;
+    background-color: var(--light-gray);
+}
+
+/* Загальний клас для вступного тексту під заголовком секції */
+.section-intro-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    color: var(--medium-gray); /* Додамо колір для узгодженості */
+}
+/* Якщо потрібно, щоб він був не завжди по центру, можна розділити */
+.section-intro-text.left-aligned {
+    text-align: left;
+    max-width: none; /* Дозволяє тексту займати всю ширину контейнера */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/* Підзаголовок для секцій (h3) */
+.section-subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8em; /* Узгоджуємо з h3 */
+    color: var(--primary-color); /* Узгоджуємо з h3 */
+}
+
+/* Список контактних даних */
+.contact-details-list {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.contact-details-list-item {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: var(--medium-gray); /* Колір тексту елемента списку */
+}
+
+.contact-details-list-item strong {
+    color: var(--dark-gray); /* Колір для акценту (наприклад, "Адреса:") */
+}
+
+.contact-details-list-item a {
+    color: var(--secondary-color); /* Колір посилань */
+}
+.contact-details-list-item a:hover {
+    text-decoration: underline;
+}
+
+/* Контактна форма */
+.contact-form-container { /* Огортаючий контейнер для форми, якщо потрібен фон секції */
+    background-color: var(--light-gray);
+}
+
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--dark-gray);
+}
+
+.contact-form .form-control { /* Загальний клас для полів вводу */
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    font-family: var(--font-family-base);
+    box-sizing: border-box; /* Важливо для правильного розрахунку ширини */
+}
+
+.contact-form textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact-form .form-control:focus { /* Стиль при фокусі */
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.2);
+}
+
+/* Контейнер для карти */
+.map-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 50%; /* Співвідношення сторін можна налаштувати, 50% для 2:1, 56.25% для 16:9 */
+    margin-top: 30px;
+    background-color: #eee; /* Фон для контейнера карти */
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.map-placeholder { /* Стиль для тексту-заглушки карти */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 20px;
+    width: calc(100% - 40px); /* Залишаємо трохи місця по боках */
+    box-sizing: border-box;
+    color: var(--medium-gray);
+}
+
+/* ----- Стилі для сторінки Новин ----- */
+
+.news-item {
+    background-color: var(--white-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.news-item h4 { /* Стиль для заголовка новини в картці */
+    margin-top: 0; /* Забираємо верхній відступ, якщо він є від загального h4 */
+    margin-bottom: 0.5em; /* Зменшуємо відступ під заголовком */
+}
+
+.news-item h4 a {
+    color: var(--primary-color);
+}
+
+.news-item h4 a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.news-date {
+    font-size: 0.9em;
+    color: var(--medium-gray);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.news-excerpt {
+    color: var(--dark-gray); /* Узгоджено з :root --dark-gray */
+    margin-bottom: 15px;
+    line-height: 1.6; /* Трохи збільшимо міжрядковий інтервал для читабельності */
+}
+
+.read-more-link {
+    font-weight: bold;
+    color: var(--secondary-color);
+    display: inline-block; /* Для кращого контролю */
+    text-decoration: none; /* Прибираємо підкреслення за замовчуванням */
+}
+
+.read-more-link:hover {
+    text-decoration: underline;
+    color: var(--primary-color); /* Змінюємо колір при наведенні для кращого ефекту */
+}
+
+/* Пагінація */
+.pagination {
+    text-align: center;
+    margin-top: 40px; /* Збільшимо відступ зверху */
+    padding-bottom: 20px; /* Додамо відступ знизу */
+}
+
+.pagination a {
+    margin: 0 5px; /* Трохи зменшимо горизонтальні відступи між кнопками */
+    padding: 8px 15px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавний перехід */
+}
+
+.pagination a:hover,
+.pagination a.current { /* Стиль для активної/поточної сторінки */
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-color: var(--primary-color); /* Переконуємось, що рамка також зафарбована */
+}
+
+/* Заголовок для секції новин, якщо потрібен окремий стиль */
+#news-intro h2 { /* Стиль для h2 всередині #news-intro */
+    margin-bottom: 20px;
+    /* text-align: center; - вже є в загальному h2, якщо не потрібно перезаписати */
+}
+
+/* ----- Додаткові стилі (можна додати в кінець файлу) ----- */
+.effective-date {
+    font-size: 0.9em;
+    color: var(--medium-gray);
+    margin-top: 15px; /* Додамо невеликий відступ зверху для кращого вигляду */
+    display: block; /* Щоб margin-top спрацював, якщо це <p> */
+}
+
+/* Якщо ще не визначено, стиль для h2 у вступній секції сторінки */
+.page-intro-section h2 {
+    margin-bottom: 20px;
+}
